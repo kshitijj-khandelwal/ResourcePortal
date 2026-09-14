@@ -30,7 +30,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
         border: '1px solid #27272a',
       }}>
-        <p style={{ fontWeight: 600, color: '#34d399', marginBottom: '2px' }}>{label || payload[0].name}</p>
+        <p style={{ fontWeight: 600, color: '#86BC25', marginBottom: '2px' }}>{label || payload[0].name}</p>
         <p style={{ margin: 0 }}>Count: <span style={{ fontWeight: 700 }}>{payload[0].value}</span></p>
       </div>
     );
