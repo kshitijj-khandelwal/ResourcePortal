@@ -95,6 +95,12 @@ def create_resource(db: Session, resource: ResourceCreate):
             status_code=status.HTTP_409_CONFLICT,
             detail="This user is already linked to a resource",
         )
+
+    employee_id = (resource.employee_id or '').strip()
+    if not employee_id:
+        employee_id = f"EMP{user.id:03d}"
+    resource.employee_id = employee_id
+
     existing_resource = db.query(Resource).filter(
         or_(
             Resource.employee_id == resource.employee_id,

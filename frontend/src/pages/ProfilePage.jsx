@@ -96,8 +96,9 @@ const ProfilePage = () => {
   }, [loadProfile]);
 
   const openCreateModal = () => {
+    const defaultEmployeeId = user?.id ? `EMP${String(user.id).padStart(3, '0')}` : '';
     setCreateForm({
-      employee_id: user?.username || '',
+      employee_id: user?.employee_id || defaultEmployeeId,
       email: user?.email || '',
       name: '',
       designation: '',
@@ -116,13 +117,12 @@ const ProfilePage = () => {
     setCreateLoading(true);
     try {
       const payload = { ...createForm };
-      
-      // employee_id and email are passed from user context, ensure they aren't empty
+      payload.employee_id = (payload.employee_id || '').trim();
+
       if (!payload.employee_id || !payload.email) {
           throw new Error('Employee ID and Email are required.');
       }
       
-      // user_id MUST be set for profile creation
       payload.user_id = user.id;
 
       if (payload.years_of_experience !== '') payload.years_of_experience = parseFloat(payload.years_of_experience);
